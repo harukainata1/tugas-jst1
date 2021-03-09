@@ -72,3 +72,13 @@ void perceptron(float input[][dimensi2],float target[],float weight[], float bia
     }
     printf("\nBobot bias, b = %.1f.\n",bias);
 }
+
+int main(){
+    float input[dimensi1][dimensi2] = {{1.0, 1.0},{1.0, 0.0},{0.0, 1.0},{0.0, 0.0}};
+    float target[] = {1.0, 0.0, 0.0, 0.0};
+    float weight[] = {0.0, 0.0};
+    float bias = 0.0;
+    float alpha = 0.8;
+    float threshold = 0.5;
+    perceptron(input,target,weight,bias,alpha,threshold,maxEpoh);
+}

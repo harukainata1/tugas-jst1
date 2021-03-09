@@ -1,0 +1,74 @@
+using namespace std;
+void perceptron(float input[][dimensi2],float target[],float weight[], float bias, float alpha, float threshold, int maxepoh){
+    int n = dimensi1;
+    float yin = 0;
+    float hasil = 0;
+    for(int epoh = 0; epoh<maxepoh; epoh++){
+        printf("\nEpoh ke-%d\n",epoh + 1);
+        printf("--------------------\n");
+        for(int i=0; i<n; i++){
+            printf("\nData ke-%d\n",i + 1);
+            int size = dimensi2;
+            printf("y_in = %.1f",bias);
+            yin = bias;
+            for (int j=0; j<size; j++){
+                yin = yin + input[i][j]*weight[j];
+                printf(" + %.1f", input[i][j]*weight[j]);
+            }
+            printf(" = %.1f\n", yin);
+            if(yin>threshold){
+                hasil = 1.0;
+            }
+            else if(yin<-threshold){
+                hasil = -1.0;
+            }
+            else{
+                hasil = 0;
+            }
+            printf("Hasil aktivasi = %.1f", hasil);
+            if(yin>0.5){
+                printf(" (y_in > 0,5)\n");
+            }
+            else if(yin<-0.5){
+                printf(" (y_in < -0,5)\n");
+            }
+            else{
+                printf(" (-0,5 < y_in < 0,5)\n");
+            }
+            printf("Target\t\t= %.1f\n", target[i]);
+            if(target[i]==1.0){
+                if(hasil != 1.0){
+                    printf("Bobot baru:\n");
+                    for(int j=0; j<size; j++){
+                        printf("w%d = %.1f + %.1f * %.1f * %.1f", j + 1, weight[j], alpha, target[i], input[i][j]);
+                        weight[j] = weight[j] + alpha * target[i] * input[i][j];
+                        printf(" = %.1f\n", weight[j]);
+                    }
+                    printf("Bobot bias baru:\n");
+                    printf("b = %.1f + %.1f * %.1f", bias, alpha, target[i]);
+                    bias = bias + alpha * target[i];
+                    printf(" = %.1f\n", bias);
+                }
+            }
+            else if(target[i]==-1.0){
+                if(hasil != -1.0){
+                    printf("Bobot baru:\n");
+                    for(int j=0; j<size; j++){
+                        printf("w%d = %.1f + %.1f * %.1f * %.1f", j + 1, weight[j], alpha, target[i], input[i][j]);
+                        weight[j] = weight[j] + alpha * target[i] * input[i][j];
+                        printf(" = %.1f\n", weight[j]);
+                    }
+                    printf("Bobot bias baru:\n");
+                    printf("b = %.1f + %.1f * %.1f", bias, alpha, target[i]);
+                    bias = bias + alpha * target[i];
+                    printf(" = %.1f\n", bias);
+                }
+            }
+        }
+    }
+    printf("\nNilai bobot, ");
+    for(int i=0; i<dimensi2; i++){
+        printf("w%d = %.1f ; ", i + 1, weight[i]);
+    }
+    printf("\nBobot bias, b = %.1f.\n",bias);
+}

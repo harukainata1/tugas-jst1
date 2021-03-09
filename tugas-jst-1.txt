@@ -82,3 +82,6 @@ int main(){
     float threshold = 0.5;
     perceptron(input,target,weight,bias,alpha,threshold,maxEpoh);
 }
+
+
+AYO SEMANGAT !!!
